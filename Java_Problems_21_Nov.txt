@@ -1,0 +1,295 @@
+Q1. Write a Java program to create an enum called "DaysOfWeek" representing the days of the week.
+Q2. Write a Java program to create an enum called "Weekend" with constants representing the days of the weekend.
+Code:
+enum DaysOfWeek{
+
+  Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday
+}
+
+enum Weekend{
+  Saturday("offDay"),
+  Sunday("offDay2");
+  //public String s; can use public String
+  private String s;
+  private Weekend(String s){
+    this.s=s;
+  }
+  
+  public String getS(){
+    return s;
+  }
+
+  
+  
+  
+}
+public class Main{
+  public static void main(String a[]){
+      // DaysOfWeek d=DaysOfWeek.Sunday;
+      // System.out.println(d);
+      // System.out.println(d.ordinal());
+      
+      
+      // DaysOfWeek arr[]=DaysOfWeek.values();
+      // for(DaysOfWeek p:arr){
+      //   System.out.println(p);
+        
+      // }
+      
+      Weekend w=Weekend.Saturday;
+      System.out.println(w);
+      System.out.println(w.ordinal());
+      System.out.println(w.getS());
+      
+      
+  }
+}
+
+Q3: Write a Java program to create an abstract class Animal with an abstract method called sound(). Create subclasses Lion and Tiger that extend the Animal class and implement the sound() method to make a specific sound for each animal.
+Code:
+abstract class Animal{
+  public abstract void sound();
+}
+class Lion extends Animal{
+  public void sound(){
+    System.out.println("Lion's sound");
+  }
+}
+class Tiger extends Animal{
+  public void sound(){
+    System.out.println("Tiger's sound ");
+  }
+}
+public class Main {
+    public static void main(String[] args) {
+        Animal lion = new Lion();
+        lion.sound(); 
+
+        Animal tiger = new Tiger();
+        tiger.sound(); 
+    }
+}
+
+Q4:
+Write a Java program to create an abstract class Shape with abstract methods calculateArea() and calculatePerimeter(). Create subclasses Circle and Triangle that extend the Shape class and implement the respective methods to calculate the area and perimeter of each shape.
+Code:
+abstract class Shape{
+  public abstract double area();
+  public abstract double perimeter();
+}
+
+class Cricle extends Shape{
+  double r;
+  public Circle(double r){
+    this.r=r;
+  }
+  public double area(){
+    return Math.PI*r*r;
+  }
+  
+  public double perimeter(){
+    return 2*Math.PI*r;
+  }
+}
+
+class Triangle extends Shape {
+    private double side1;
+    private double side2;
+    private double side3;
+
+    public Triangle(double side1, double side2, double side3) {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    @Override
+    public double area() {
+        double s = (side1 + side2 + side3) / 2; // Semi-perimeter
+        return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
+
+    @Override
+    public double perimeter() {
+        return side1 + side2 + side3;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+		double r = 4.0;
+        Circle circle = new Circle(r);
+		double ts1 = 3.0, ts2 = 4.0, ts3 = 5.0;
+        Triangle triangle = new Triangle(ts1, ts2, ts3);
+        System.out.println("Radius of the Circle"+r);
+        System.out.println("Area of the Circle: " + circle.area());
+        System.out.println("Perimeter of the Circle: " + circle.perimeter());
+		System.out.println("\nSides of the Traiangel are: "+ts1+','+ts2+','+ts3);
+        System.out.println("Area of the Triangle: " + triangle.area());
+        System.out.println("Perimeter of the Triangle: " + triangle.perimeter());
+    }
+}
+
+Q5:
+Game should have the following methods:
+Constructor to generate the random number
+takeUserInput() to take a user input of number
+isCorrectNumber() to detect whether the number entered by the user is true
+
+Code:
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+import java.util.*;
+
+class Game{
+    private int computerNumber;
+    private int userInput;
+    public Game(){
+        Random rand=new Random();
+        computerNumber=rand.nextInt(10);
+    }
+    
+    
+    public void takeUserInput(){
+        Scanner scan=new Scanner(System.in);
+        System.out.println("Enter your number: ");
+        userInput=scan.nextInt();
+    }
+    
+    public int isCorrectNumber(){
+        
+        if(userInput<computerNumber){
+           return -1;
+        }
+        else if(userInput>computerNumber){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+       
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+		
+		Game g=new Game();
+		
+		while(true){
+		    g.takeUserInput();
+		    if(g.isCorrectNumber()==-1){
+		        System.out.println("Guess is low");
+		    }
+		    else if(g.isCorrectNumber()==1){
+		        System.out.println("Guess is high");
+		    }
+		    else{
+		        System.out.println("You win!");
+		        break;
+		    }
+		}
+	}
+}
+
+Q6:
+Create an abstract class pen with methods write () and refill () as abstract methods 
+Use the pen class from Q1 to create a concrete class fountain pen with additional method change Nib ()
+Create a class monkey with jump ( ) and bite ( ) methods Create a class human whichinherits this monkey class and implements basicanimal interface with eat ( ) and sleep methods
+
+Code:
+abstract class Pen{
+    public abstract void write();
+    public abstract void refill();
+    
+}
+
+class FountainPen extends Pen{
+    public void write(){
+        System.out.println("Writing.....");
+    }
+    public void refill(){
+        System.out.println("Refilling....");
+    }
+    
+    public void changeNib(){
+        System.out.println("Changing Nib....");
+    }
+}
+
+class Monkey{
+    public void jump(){
+        System.out.println("Jumping......");
+    }
+    public void bite(){
+        System.out.println("Biting.....");
+    }
+}
+
+interface BasicAnimal{
+    void eat();
+    void sleep();
+}
+
+class Human extends Monkey implements BasicAnimal{
+    @Override
+    public void jump(){
+        System.out.println("Jumping2......");
+    }
+    
+    public void speak(){
+        System.out.println("Hello sir!");
+    }
+    @Override
+    public void eat(){
+        System.out.println("Eating....");
+    }
+    @Override
+    public void sleep(){
+        System.out.println("Sleeping...");
+    }
+}
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		Pen p=new FountainPen();
+		p.write();
+		p.refill();
+		//p.changeNib();error
+		
+		
+		FountainPen fp=new FountainPen();
+		fp.write();
+		fp.refill();
+		fp.changeNib();
+		
+		Monkey m=new Monkey();
+		m.jump();
+		m.bite();
+		
+		m=new Human();
+		m.jump();
+		m.bite();
+		
+		
+		Human h=new Human();
+		h.jump();
+		h.speak();
+		h.eat();
+		h.sleep();
+		h.bite();
+		
+		BasicAnimal ba=new Human();
+		ba.eat();
+		ba.sleep();
+		
+		
+	}
+}
