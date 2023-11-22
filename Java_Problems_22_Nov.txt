@@ -1,0 +1,366 @@
+//Hackerraank
+
+Q1:
+Exception handling is the process of responding to the occurrence, during computation, of exceptions – anomalous or exceptional conditions requiring special processing – often changing the normal flow of program execution. (Wikipedia)
+
+Java has built-in mechanism to handle exceptions. Using the try statement we can test a block of code for errors. The catch block contains the code that says what to do if exception occurs.
+
+This problem will test your knowledge on try-catch block.
+
+You will be given two integers x and y as input, you have to compute x/y . If x  and y are not  bit signed integers or if y is zero, exception will occur and you have to report it. Read sample Input/Output to know what to report in case of exceptions.
+code:
+
+import java.util.*;
+
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
+        Scanner scan=new Scanner(System.in);
+        
+        try{
+            int num1=scan.nextInt();
+            int num2=scan.nextInt();
+            int res=num1/num2;
+            System.out.println(res);
+        }catch(ArithmeticException e){
+            System.out.println(e);
+        }
+        catch(InputMismatchException e){
+            System.out.println("java.util.InputMismatchException");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        finally{
+            scan.close();
+        }
+    }
+}
+
+//Hackerraank
+
+Q2:You are required to compute the power of a number by implementing a calculator. Create a class MyCalculator which consists of a single method long power(int, int). This method takes two integers, n and p, as parameters and finds n^p. If either n or p is negative, then the method must throw an exception which says "n and p should not be negative". Also, if both n and p are zero, then the method must throw an exception which says "n and p should not be zero"
+
+For example, -4 and -5 would result in java.lang.Exception: n or p should not be negative.
+
+Complete the function power in class MyCalculator and return the appropriate result after the power operation or an appropriate exception as detailed above.
+
+Code:
+import java.util.Scanner;
+class MyCalculator {
+    /*
+    * Create the method long power(int, int) here.
+    */
+    public int power(int n,int p) throws Exception{
+        if(n==0 && p==0){
+            throw new Exception("n and p should not be zero.");
+        }
+        if(n<0 ||p<0){
+            throw new Exception("n or p should not be negative.");
+        }
+        
+        return (int)Math.pow(n,p);
+    }
+}
+
+public class Solution {
+    public static final MyCalculator my_calculator = new MyCalculator();
+    public static final Scanner in = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        while (in .hasNextInt()) {
+            int n = in .nextInt();
+            int p = in .nextInt();
+            
+            try {
+                System.out.println(my_calculator.power(n, p));
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+}
+
+//w3 resource
+
+Q3. Write a Java program that throws an exception and catch it using a try-catch block.
+Code:
+public class Main{
+  public static void main(String s[]){
+    int i=0;
+    int j=0;
+    try{
+      j=4/i;
+      System.out.println(j);
+    }
+    catch(ArithmeticException e){
+      System.out.println(e);
+    }
+  
+    
+  }
+}
+//w3 resource
+Q4. Write a Java program to create a method that takes an integer as a parameter and throws an exception if the number is odd.
+Code:
+import java.util.*;
+
+public class Main{
+  public static void main(String s[]){
+    Scanner scan=new Scanner(System.in);
+    int num=scan.nextInt();
+        
+
+    try{
+      if(num%2==0){
+           System.out.println(num);
+      }
+      else{
+        throw new ArithmeticException("Number is odd");
+      }
+     
+    }
+    catch(ArithmeticException e){
+      System.out.println(e);
+    }
+    
+  }
+}
+
+//w3 resource
+Q5.Write a Java program to create a method that takes a string as input and throws an exception if the string does not contain vowels.
+Code:
+import java.util.*;
+
+
+class NoVowelsException extends Exception{
+  NoVowelsException(String message){
+    super(message);
+  }
+}
+
+
+public class Main{
+  public static boolean checkVowel(char c){
+    if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u'){
+      return true;
+    }
+    return false;
+  }
+  
+  public static void contains(String str) throws NoVowelsException{
+      boolean containVowel=false;
+    
+      for(int i=0;i<str.length();i++){
+          if(checkVowel(str.charAt(i))){
+            containVowel=true;
+            break;
+          }
+      }
+      if(!containVowel)
+        throw new NoVowelsException("Does not Contain Vowel");
+     
+  }
+  
+  public static void main(String s[]){
+    Scanner scan=new Scanner(System.in);
+    String str=scan.next();
+        
+
+    try{
+      
+      contains(str);
+      System.out.println("String contanis vowels");
+     
+    }
+    catch(NoVowelsException e){
+      System.out.println(e);
+    }
+    
+  }
+}
+
+
+//w3 resource
+
+Q6. Write a Java program that reads a list of integers from the user and throws an exception if any numbers are duplicates.
+import java.util.*;
+
+
+class DuplicateException extends Exception{
+  DuplicateException(String message){
+    super(message);
+  }
+}
+
+
+public class Main{
+ 
+  
+  public static void contains(int myArray[]) throws DuplicateException{
+      boolean containDuplicate=false;
+    
+      for(int i=0;i<myArray.length;i++){
+          for(int j=i+1;j<myArray.length;j++){
+              if(myArray[i]==myArray[j]){
+                containDuplicate=true;
+              }
+          }
+      }
+      if(containDuplicate)
+        throw new DuplicateException("Contain Duplicate");
+     
+  }
+  
+  public static void main(String s[]){
+    Scanner scan=new Scanner(System.in);
+    System.out.println("Enter the array Size ");
+    int  n=scan.nextInt();
+    int myArray[]=new int[n];
+    
+    for(int i=0;i<n;i++){
+      myArray[i]=scan.nextInt();
+    }
+    try{
+      
+      contains(myArray);
+      System.out.println("Array Does not contain duplicate");
+     
+    }
+    catch(DuplicateException e){
+      System.out.println(e);
+    }
+    
+  }
+}
+
+//w3 resource
+
+Q7.Write a Java program to create a basic Java thread that prints "Hello, World!" when executed.
+Code:
+public class Main extends Thread{
+    public void run(){
+      System.out.println("Hello, World!");
+    }
+    
+    public static void main(String[] args){
+      Main obj1=new Main();
+      obj1.start();
+    }
+}
+
+//Hackerearth
+
+
+Q8.You are given two arrays A and B ,N of length . You can select any subarray and then sort the elements in ascending order of that subarray for arrays 
+A and B.
+Find the minimum length of the subarray you can choose to make A and B same after performing the operation. and are permutations of each other.
+
+Code:
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        Scanner scan=new Scanner(System.in);
+        int t=scan.nextInt();
+        
+        while(t>0){
+            int n=scan.nextInt();
+            int a[]=new int[n];
+            int b[]=new int[n];
+            for(int i=0;i<n;i++){
+                a[i]=scan.nextInt();
+            }
+
+            for(int i=0;i<n;i++){
+                b[i]=scan.nextInt();
+            }
+            int i=0;
+            int j=n-1;
+
+            while(i<n && a[i]==b[i]){
+                i++;
+            }
+            while(j>=0 && a[j]==b[j]){
+                j--;
+            }
+            System.out.println(j-i+1);
+            t--;
+        }
+    }
+}
+//Hackerearth
+Q9.A city has N Tram stations numbered from 1 to N  that are connected to one another and form a circle. You are given an array ticket_cost  where ticket_cost[i] is the cost of a ticket between the stops number i and (i + 1) % N. The Tram can travel in both directions i.e. clockwise and anti-clockwise.
+
+Return the minimum cost to travel between the given start and finish station.
+
+You are given an integer N where N represents the total number of the tram stations, an integer start which represents the start station, and an integer finish which represents the finish station. You are given an array of positive integers  ticket_cost where ticket_cost[i] represents the ticket cost between the station number i and (i + 1) % N.
+
+Code:
+import java.io.*;
+import java.util.*;
+
+
+public class TestClass {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter wr = new PrintWriter(System.out);
+         int N = Integer.parseInt(br.readLine().trim());
+         int start = Integer.parseInt(br.readLine().trim());
+         int finish = Integer.parseInt(br.readLine().trim());
+         String[] arr_Ticket_cost = br.readLine().split(" ");
+         int[] Ticket_cost = new int[N];
+         for(int i_Ticket_cost = 0; i_Ticket_cost < arr_Ticket_cost.length; i_Ticket_cost++)
+         {
+         	Ticket_cost[i_Ticket_cost] = Integer.parseInt(arr_Ticket_cost[i_Ticket_cost]);
+         }
+
+         long out_ = solve(N, start, finish, Ticket_cost);
+         System.out.println(out_);
+
+         wr.close();
+         br.close();
+    }
+    static long solve(int N, int start, int finish, int[] Ticket_cost){
+       // Write your code here
+        long result = 0;
+        long totalSum=0;
+        long clockSum=0;
+        long antiClockSum=0;
+        int nstart=Math.min(start,finish);
+        int nfinish=Math.max(start,finish);
+        for(int i=0;i<N;i++){
+            totalSum+=Ticket_cost[i];
+        }
+        for(int i=nstart-1;i<nfinish-1;i++){
+            clockSum+=Ticket_cost[i];
+        }
+        antiClockSum=totalSum-clockSum;
+        result=clockSum<antiClockSum?clockSum:antiClockSum;
+        return result;
+    
+    }
+}
+
+
+
+
+Q10:Write a Java program to implement a lambda expression to find the sum of two integers.
+Code:
+interface MyClass{
+  int sum(int a,int b);
+}
+
+
+public class Main{
+  public static void main(String[] args) {
+    MyClass c=( a,b)->a+b;
+    
+    System.out.println(c.sum(3,4));
+  }
+}
+
