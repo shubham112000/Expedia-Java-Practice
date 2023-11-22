@@ -1,0 +1,366 @@
+//Hackerrank
+
+Q1:Java Inheritance I
+
+link:https://www.hackerrank.com/challenges/java-inheritance-1/problem?isFullScreen=true
+Code:
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Animal{
+	void walk(){
+		System.out.println("I am walking");
+	}
+}
+
+class Bird extends Animal{
+	void fly(){
+		System.out.println("I am flying");
+	}
+    void sing(){
+        System.out.println("I am singing");
+    }
+}
+
+
+
+public class Solution{
+
+   public static void main(String args[]){
+
+	  Bird bird = new Bird();
+	  bird.walk();
+	  bird.fly();
+      bird.sing();
+	
+   }
+}
+
+Q2:Java Inheritance II
+Write the following code in your editor below:
+
+A class named Arithmetic with a method named add that takes 2 integers as parameters and returns an integer denoting their sum.
+A class named Adder that inherits from a superclass named Arithmetic.
+Your classes should not be be public.
+
+link:https://www.hackerrank.com/challenges/java-inheritance-2/problem?isFullScreen=true
+
+Code:
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+//Write your code here
+class Arithmetic{
+    int add(int num1,int num2){
+        return num1+num2;
+    }
+}
+
+class Adder extends Arithmetic{
+    
+}
+public class Solution{
+    public static void main(String []args){
+        // Create a new Adder object
+        Adder a = new Adder();
+        
+        // Print the name of the superclass on a new line
+        System.out.println("My superclass is: " + a.getClass().getSuperclass().getName());	
+        
+        // Print the result of 3 calls to Adder's `add(int,int)` method as 3 space-separated integers:
+        System.out.print(a.add(10,32) + " " + a.add(10,3) + " " + a.add(10,10) + "\n");
+     }
+}
+
+Q3:Java Method Overriding
+link:https://www.hackerrank.com/challenges/java-method-overriding/problem?isFullScreen=true
+
+Code:
+import java.util.*;
+class Sports{
+
+    String getName(){
+        return "Generic Sports";
+    }
+  
+    void getNumberOfTeamMembers(){
+        System.out.println( "Each team has n players in " + getName() );
+    }
+}
+
+class Soccer extends Sports{
+    @Override
+    String getName(){
+        return "Soccer Class";
+    }
+    @Override
+     void getNumberOfTeamMembers(){
+        System.out.println( "Each team has 11 players in " + getName());
+    }
+    // Write your overridden getNumberOfTeamMembers method here
+
+}
+
+public class Solution{
+	
+    public static void main(String []args){
+        Sports c1 = new Sports();
+        Soccer c2 = new Soccer();
+        System.out.println(c1.getName());
+        c1.getNumberOfTeamMembers();
+        System.out.println(c2.getName());
+        c2.getNumberOfTeamMembers();
+	}
+}
+
+
+Q4:Java Method Overriding 2 (Super Keyword)
+When a method in a subclass overrides a method in superclass, it is still possible to call the overridden method using super keyword. If you write super.func() to call the function func(), it will call the method that was defined in the superclass.
+You are given a partially completed code in the editor. Modify the code so that the code prints the following text:
+link:https://www.hackerrank.com/challenges/java-method-overriding-2-super-keyword/problem?isFullScreen=true
+
+code:
+import java.util.*;
+import java.io.*;
+
+class BiCycle{
+	String define_me(){
+		return "a vehicle with pedals.";
+	}
+}
+
+class MotorCycle extends BiCycle{
+	String define_me(){
+		return "a cycle with an engine.";
+	}
+	
+	MotorCycle(){
+		System.out.println("Hello I am a motorcycle, I am "+ define_me());
+
+		String temp=super.define_me(); //Fix this line
+
+		System.out.println("My ancestor is a cycle who is "+ temp );
+	}
+	
+}
+class Solution{
+	public static void main(String []args){
+		MotorCycle M=new MotorCycle();
+	}
+}
+
+Q5:Java Instanceof keyword
+The Java instanceof operator is used to test if the object or instance is an instanceof the specified type.
+
+In this problem we have given you three classes in the editor:
+
+Student class
+Rockstar class
+Hacker class
+In the main method, we populated an ArrayList with several instances of these classes. count method calculates how many instances of each type is present in the ArrayList. The code prints three integers, the number of instance of Student class, the number of instance of Rockstar class, the number of instance of Hacker class.
+
+But some lines of the code are missing, and you have to fix it by modifying only 3 lines! Don't add, delete or modify any extra line.
+
+To restore the original code in the editor, click on the top left icon in the editor and create a new buffer.
+
+link: https://www.hackerrank.com/challenges/java-instanceof-keyword/problem?isFullScreen=true
+
+Code:
+import java.util.*;
+
+
+class Student{}
+class Rockstar{   }
+class Hacker{}
+
+
+public class InstanceOFTutorial{
+	
+   static String count(ArrayList mylist){
+      int a = 0,b = 0,c = 0;
+      for(int i = 0; i < mylist.size(); i++){
+         Object element=mylist.get(i);
+         if(element instanceof Student)
+            a++;
+         if(element instanceof Rockstar)
+            b++;
+         if(element instanceof Hacker)
+            c++;
+      }
+      String ret = Integer.toString(a)+" "+ Integer.toString(b)+" "+ Integer.toString(c);
+      return ret;
+   }
+
+   public static void main(String []args){
+      ArrayList mylist = new ArrayList();
+      Scanner sc = new Scanner(System.in);
+      int t = sc.nextInt();
+      for(int i=0; i<t; i++){
+         String s=sc.next();
+         if(s.equals("Student"))mylist.add(new Student());
+         if(s.equals("Rockstar"))mylist.add(new Rockstar());
+         if(s.equals("Hacker"))mylist.add(new Hacker());
+      }
+      System.out.println(count(mylist));
+   }
+}
+
+Q6:Create a class Employee with the following properties and methods:
+Salary (property) (int)
+getSalary (method returning int)
+name (property) (String)
+getName (method returning String)
+setName (method changing name)
+Create a class cellphone with methods to print “ringing…”, “vibrating…”, etc.
+Create a class Square with a method to initialize its side, calculating area, perimeter etc.
+Create a class Rectangle & problem 3.
+Create a class TommyVecetti for Rockstar Games capable of hitting (print hitting…), running, firing, etc.
+Repeat problem 4 for a circle
+
+Code:
+class Employee{
+    private int salary;
+    private String name;
+    
+    public void setName(String name){
+        this.name=name;
+    }
+    
+    
+    public String getName(){
+        return this.name;
+    }
+    
+    public void setSalary(){
+        this.salary=salary;
+    }
+    
+    public int getSalary(){
+        return this.salary;
+    }
+}
+
+class CellPhone{
+    public void printRing(){
+        System.out.println("Ringing...");
+    }
+    public void printVibrate(){
+        System.out.println("Vibrating....");
+    }
+}
+
+class Square{
+    private int side;
+    
+    public Square(int side){
+        this.side=side;
+    }
+    
+    public void setSide(int side){
+        this.side=side;
+    }
+    
+    public int getSide(){
+        return this.side;
+    }
+    
+    public int area(){
+        return side*side;
+    }
+    
+    public int perimeter(){
+        return 4*side;
+    }
+}
+
+class Recatngle {
+    private int l;
+    private int b;
+    
+    public Recatngle(int l,int b){
+        this.l=l;
+        this.b=b;
+    }
+    
+    public void setLength(int l){
+        this.l=l;
+    }
+    
+    public int getLength(){
+        return this.l;
+    }
+    
+    public void setWidth(int w){
+        this.b=b;
+    }
+    
+    public int getWidth(){
+        return this.b;
+    }
+    
+    public int area(){
+        return l*b;
+    }
+    
+    public int perimeter(){
+        return 2*(l+b);
+    }
+}
+
+
+class Circle{
+    private int r;
+    
+    public Circle(int r){
+        this.r=r;
+    }
+    
+    public void setRadius(int r){
+        this.r=r;
+    }
+    
+    public int getRadius(){
+        return this.r;
+    }
+    
+    public double area(){
+        return Math.PI*r*r;
+    }
+    
+    public double perimeter(){
+        return 2*Math.PI*r;
+    }
+}
+
+class Tommy{
+    public void hit(){
+        System.out.println("hitting");
+    }
+    public void run(){
+        System.out.println("running");
+    }
+    public void fire(){
+        System.out.println("firing");
+    }
+}
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		Circle c=new Circle(3);
+		System.out.println(c.perimeter());
+		System.out.println(c.area());
+		
+		Tommy player1 = new Tommy();
+        player1.fire();
+        player1.run();
+        player1.hit();
+	}
+}
