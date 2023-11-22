@@ -1,0 +1,259 @@
+
+
+HackerRank
+
+Q1:Welcome to Java!
+Welcome to the world of Java! In this challenge, we practice printing to stdout.
+The code stubs in your editor declare a Solution class and a main method. Complete the main method by copying the two lines of code below and pasting them inside the body of your main method.
+link:https://www.hackerrank.com/challenges/java-stdin-and-stdout-1/problem?isFullScreen=true
+
+Code:
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Print output to STDOUT. Your class should be named Solution. */
+        
+        System.out.println("Hello, World.");
+        System.out.println("Hello, Java.");
+    }
+}
+
+
+Q2:Java Stdin and Stdout I
+Most HackerRank challenges require you to read input from stdin (standard input) and write output to stdout (standard output).
+link: https://www.hackerrank.com/challenges/java-stdin-stdout/problem?isFullScreen=true
+
+One popular way to read input from stdin is by using the Scanner class and specifying the Input Stream as System
+
+code:
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int a = scan.nextInt();
+        int b=scan.nextInt();
+        int c=scan.nextInt();
+        
+
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+        // Complete this line
+        // Complete this line
+    }
+}
+
+Q3:Java If-Else
+In this challenge, we test your knowledge of using if-else conditional statements to automate decision-making processes.
+Given an integer, , perform the following conditional actions:
+
+link:https://www.hackerrank.com/challenges/java-if-else/problem?isFullScreen=true
+
+If  is odd, print Weird
+If  is even and in the inclusive range of  to , print Not Weird
+If  is even and in the inclusive range of  to , print Weird
+If  is even and greater than , print Not Weird
+Complete the stub code provided in your editor to print whether or not  is weird.
+
+Code:
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int N = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        scanner.close();
+        
+        if(N%2==1){
+           System.out.println("Weird"); 
+        }
+        else{
+            if(N>=2 && N<=5){
+                System.out.println("Not Weird"); 
+            }
+            else if(N>=6 && N<=20){
+                System.out.println("Weird"); 
+            }
+            else{
+                System.out.println("Not Weird"); 
+            }
+        }
+    }
+}
+
+
+Q4:Java Stdin and Stdout II
+In this challenge, you must read an integer, a double, and a String from stdin, then print the values according to the instructions in the Output Format section below. To make the problem a little easier, a portion of the code is provided for you in the editor
+import java.util.Scanner;
+
+link:https://www.hackerrank.com/challenges/java-stdin-stdout/problem?isFullScreen=true
+code:
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int i = scan.nextInt();
+        double d=scan.nextDouble();
+        scan.nextLine();
+        String s="";
+        s=scan.nextLine();
+        scan.close();
+
+        // Write your code here.
+
+        System.out.println("String: " + s);
+        System.out.println("Double: " + d);
+        System.out.println("Int: " + i);
+    }
+}
+
+
+Q5:Java Loops I
+Given an integer,N, print its first 10 multiples. Each multiple N*i (where 1<=i<=10) should be printed on a new line in the form: N x i = result.
+link:https://www.hackerrank.com/challenges/java-loops-i/problem?isFullScreen=true
+code:
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(bufferedReader.readLine().trim());
+
+        bufferedReader.close();
+        
+        for(int i=1;i<=10;i++){
+            System.out.println(N + " x "+i+" = "+(N*i));
+        }
+    }
+}
+
+Q6:Java Loops II
+We use the integers a,b , and n to create the following series:
+
+You are given q queries in the form of a,b , and n. For each query, print the series corresponding to the given a,b , and n values as a single line of n  space-separated integers.
+link:https://www.hackerrank.com/challenges/java-loops/problem?isFullScreen=true
+Code:
+import java.util.*;
+import java.io.*;
+
+class Solution{
+    public static void main(String []argh){
+        Scanner in = new Scanner(System.in);
+        int t=in.nextInt();
+        for(int i=0;i<t;i++){
+            int a = in.nextInt();
+            int b = in.nextInt();
+            int n = in.nextInt();
+            int temp=a;
+            for(int x=0;x<n;x++){
+                temp+=Math.pow(2,x)*b;
+                System.out.print(temp+" ");
+            }
+            System.out.print('\n');
+        }
+        in.close();
+    }
+}
+
+Q7:Java End-of-file
+The challenge here is to read n lines of input until you reach EOF, then number and print all n lines of content.
+
+link:https://www.hackerrank.com/challenges/java-end-of-file/problem?isFullScreen=true
+code:
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        int i=1;
+        Scanner scan=new Scanner(System.in);
+        
+        while(scan.hasNext()){
+            String s=scan.nextLine();
+            System.out.println(i+" "+s);
+            i++;
+        }
+        scan.close();
+    }
+}
+
+Q8:Java Datatypes
+
+Java has 8 primitive data types; char, boolean, byte, short, int, long, float, and double. For this exercise, we'll work with the primitives used to hold integer values (byte, short, int, and long):
+
+A byte is an 8-bit signed integer.
+A short is a 16-bit signed integer.
+An int is a 32-bit signed integer.
+A long is a 64-bit signed integer.
+Given an input integer, you must determine which primitive data types are capable of properly storing that input.
+To get you started, a portion of the solution is provided for you in the editor.
+
+link: https://www.hackerrank.com/challenges/java-datatypes/problem?isFullScreen=true
+
+code:
+import java.util.*;
+import java.io.*;
+
+
+
+class Solution{
+    public static void main(String []argh)
+    {
+
+
+
+        Scanner sc = new Scanner(System.in);
+        int t=sc.nextInt();
+
+        for(int i=0;i<t;i++)
+        {
+
+            try
+            {
+                long x=sc.nextLong();
+                System.out.println(x+" can be fitted in:");
+                if(x>=-128 && x<=127)System.out.println("* byte");
+                //Complete the code
+                if(x>=-32768 && x<= 32767)System.out.println("* short");
+                if(x>=-2147483648 && x<= 2147483647)System.out.println("* int");      
+                if(x>=-9223372036854775808l && x<= 9223372036854775807l)System.out.println("* long");
+            }
+            catch(Exception e)
+            {
+                System.out.println(sc.next()+" can't be fitted anywhere.");
+            }
+
+        }
+    }
+}
+
+
+

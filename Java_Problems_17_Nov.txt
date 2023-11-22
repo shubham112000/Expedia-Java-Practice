@@ -1,0 +1,388 @@
+
+//Hackernak
+
+Q1:Java Static Initializer Block
+Static initialization blocks are executed when the class is loaded, and you can initialize static variables in those blocks.
+
+It's time to test your knowledge of Static initialization blocks. You can read about it here.
+
+You are given a class Solution with a main method. Complete the given code so that it outputs the area of a parallelogram with breadth B and height H . You should read the variables from the standard input.
+
+If B<=0 or H<=0  , the output should be "java.lang.Exception: Breadth and height must be positive" without quotes.
+
+link:https://www.hackerrank.com/challenges/java-static-initializer-block/problem?isFullScreen=true
+
+code:
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static boolean flag=true;
+    static Scanner scan =new Scanner(System.in);
+    static int B=scan.nextInt();
+    static int H=scan.nextInt();
+    
+    static{
+        try{
+            if(B<=0 || H<=0){
+                flag=false;
+                throw new Exception("Breadth and height must be positive");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }finally{
+            scan.close();
+        }
+    }
+
+public static void main(String[] args){
+		if(flag){
+			int area=B*H;
+			System.out.print(area);
+		}
+		
+	}//end of main
+
+}//end of class
+
+Q2:Java Int to String
+You are given an integer n , you have to convert it into a string.
+
+Please complete the partially completed code in the editor. If your code successfully converts n into a string s the code will print "Good job". Otherwise it will print "Wrong answer".
+
+n can range between -100 to 100 inclusive.
+
+link:https://www.hackerrank.com/challenges/java-int-to-string/problem?isFullScreen=true
+
+code:
+import java.util.*;
+import java.security.*;
+public class Solution {
+ public static void main(String[] args) {
+
+  DoNotTerminate.forbidExit();
+
+  try {
+   Scanner in = new Scanner(System.in);
+   int n = in .nextInt();
+   in.close();
+   //String s=???; Complete this line below
+
+   //Write your code here
+   String s=Integer.toString(n);
+
+   
+   if (n == Integer.parseInt(s)) {
+    System.out.println("Good job");
+   } else {
+    System.out.println("Wrong answer.");
+   }
+  } catch (DoNotTerminate.ExitTrappedException e) {
+   System.out.println("Unsuccessful Termination!!");
+  }
+ }
+}
+
+//The following class will prevent you from terminating the code using exit(0)!
+class DoNotTerminate {
+
+ public static class ExitTrappedException extends SecurityException {
+
+  private static final long serialVersionUID = 1;
+ }
+
+ public static void forbidExit() {
+  final SecurityManager securityManager = new SecurityManager() {
+   @Override
+   public void checkPermission(Permission permission) {
+    if (permission.getName().contains("exitVM")) {
+     throw new ExitTrappedException();
+    }
+   }
+  };
+  System.setSecurityManager(securityManager);
+ }
+}
+
+
+Q3:Java Strings Introduction
+
+The elements of a String are called characters. The number of characters in a String is called the length, and it can be retrieved with the String.length() method.
+Given two strings of lowercase English letters, A and B, perform the following operations:
+Sum the lengths of A and B.
+Determine if A is lexicographically larger than B  (i.e.: does B come before A in the dictionary?).
+Capitalize the first letter in A and B and print them on a single line, separated by a space.
+
+
+link:https://www.hackerrank.com/challenges/java-strings-introduction/problem?isFullScreen=true
+
+Code:
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner sc=new Scanner(System.in);
+        String A=sc.next();
+        String B=sc.next();
+        
+        String temp=A.compareTo(B)>0?"Yes":"No";
+        /* Enter your code here. Print output to STDOUT. */
+        System.out.println((A.length()+B.length()));
+        System.out.println(temp);
+        
+        System.out.println(Character.toUpperCase(A.charAt(0))+A.substring(1).toLowerCase()+" "+Character.toUpperCase(B.charAt(0))+B.substring(1).toLowerCase());
+        
+    }
+}
+
+Q4:Java String Reverse
+A palindrome is a word, phrase, number, or other sequence of characters which reads the same backward or forward.
+
+Given a string A , print Yes if it is a palindrome, print No otherwise.
+
+link:https://www.hackerrank.com/challenges/java-string-reverse/problem?isFullScreen=true
+
+Code:
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    
+    public static boolean ispalindrome(String s){
+        int i=0,j=s.length()-1;
+        while(i<=j){
+            if(s.charAt(i)!=s.charAt(j)){
+              return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+    
+    public static void main(String[] args) {
+        
+        Scanner sc=new Scanner(System.in);
+        String A=sc.next();
+        /* Enter your code here. Print output to STDOUT. */
+        if(ispalindrome(A)){
+            System.out.println("Yes");
+        }else{
+            System.out.println("No");
+        }
+    }
+}
+
+
+
+Q5:Java Anagram
+Two strings, a  and b, are called anagrams if they contain all the same characters in the same frequencies. For this challenge, the test is not case-sensitive. For example, the anagrams of CAT are CAT, ACT, tac, TCA, aTC, and CtA.
+
+link:https://www.hackerrank.com/challenges/java-anagrams/problem?isFullScreen=true
+
+Code:
+import java.util.Scanner;
+
+public class Solution {
+
+    static boolean isAnagram(String a, String b) {
+        // Complete the function
+        if(a.length()!=b.length()){
+            return false;
+        }
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+        
+        int freq[]=new int[26];
+        
+        for(int i=0;i<a.length();i++){
+            int index=a.charAt(i)-'a';
+            freq[index]++;
+            
+            index=b.charAt(i)-'a';
+            freq[index]--;
+        }
+        
+        for(int i=0;i<26;i++){
+            if(freq[i]!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+    
+        Scanner scan = new Scanner(System.in);
+        String a = scan.next();
+        String b = scan.next();
+        scan.close();
+        boolean ret = isAnagram(a, b);
+        System.out.println( (ret) ? "Anagrams" : "Not Anagrams" );
+    }
+}
+
+Q6:Java 1D Array
+
+
+link:https://www.hackerrank.com/challenges/java-1d-array-introduction/problem?isFullScreen=true
+
+code:
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+	   
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++){
+            a[i]=scan.nextInt();
+        }
+        scan.close();
+
+        // Prints each sequential element in array a
+        for (int i = 0; i < a.length; i++) {
+            System.out.println(a[i]);
+        }
+    }
+}
+
+
+Q7:Java 2D Array
+
+You are given a 6*6  2D array. An hourglass in an array is a portion shaped like this:
+a b c
+  d
+e f g
+For example, if we create an hourglass using the number 1 within an array full of zeros, it may look like this:
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+Actually, there are many hourglasses in the array above. The three leftmost hourglasses are the following:
+1 1 1     1 1 0     1 0 0
+  1         0         0
+1 1 1     1 1 0     1 0 0
+The sum of an hourglass is the sum of all the numbers within it. The sum for the hourglasses above are 7, 4, and 2, respectively.
+
+In this problem you have to print the largest sum among all the hourglasses in the array.
+
+
+link:https://www.hackerrank.com/challenges/java-2d-array/problem?isFullScreen=true
+
+Code:
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        List<List<Integer>> arr = new ArrayList<>();
+
+        for (int i = 0; i < 6; i++) {
+            String[] arrRowTempItems = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+            List<Integer> arrRowItems = new ArrayList<>();
+
+            for (int j = 0; j < 6; j++) {
+                int arrItem = Integer.parseInt(arrRowTempItems[j]);
+                arrRowItems.add(arrItem);
+            }
+
+            arr.add(arrRowItems);
+        }
+        int maxi=Integer.MIN_VALUE ;
+        for(int i=0;i<4;i++){
+        
+            for(int j=0;j<4;j++){
+                int sum=0;
+                for(int k=j;k<=j+2;k++){
+                    sum+=arr.get(i).get(k);
+                    sum+=arr.get(i+2).get(k);
+                }
+                sum+=arr.get(i+1).get(j+1);
+                
+                maxi=Math.max(sum, maxi);
+            }
+        }
+        
+        System.out.println(maxi);
+
+        bufferedReader.close();
+    }
+}
+
+
+Q8:Java Subarray
+
+We define the following:
+
+A subarray of an n-element array is an array composed from a contiguous block of the original array's elements. For example, if array=[1,2,3] , then the subarrays are[1] ,[2] ,[3] ,[1,2] ,[2,3] ,[1,2,3] and . Something like [1,3]  would not be a subarray as it's not a contiguous subsection of the original array.
+The sum of an array is the total sum of its elements.
+An array's sum is negative if the total sum of its elements is negative.
+An array's sum is positive if the total sum of its elements is positive.
+Given an array of n integers, find and print its number of negative subarrays on a new line.
+
+link:https://www.hackerrank.com/challenges/java-negative-subarray/problem?isFullScreen=true
+
+Code:
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
+        Scanner scan=new Scanner(System.in);
+        int n=scan.nextInt();
+        int arr[]=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=scan.nextInt();
+        }
+        scan.close();
+        
+        int count=0;
+        for(int i=0;i<n;i++){
+            int sum=0;
+            for(int j=i;j<n;j++){
+                sum+=arr[j];
+                if(sum<0){
+                    count++;
+                }
+            }
+        }
+        
+        System.out.println(count);
+    }
+}
+
+
+
+
+
+
+
+
