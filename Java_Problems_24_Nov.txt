@@ -1,0 +1,579 @@
+//Hackerrank
+Q1:Java Substring Comparisons
+We define the following terms:
+
+Lexicographical Order, also known as alphabetic or dictionary order, orders characters as follows:
+For example, ball < cat, dog < dorm, Happy < happy, Zoo < ball.
+
+A substring of a string is a contiguous block of characters in the string. For example, the substrings of abc are a, b, c, ab, bc, and abc.
+Given a string,s , and an integer,k , complete the function so that it finds the lexicographically smallest and largest substrings of length k.
+
+Code:
+import java.util.Scanner;
+
+public class Solution {
+
+    public static String getSmallestAndLargest(String s, int k) {
+        String smallest = "";
+        String largest = "";
+        
+        // Complete the function
+        // 'smallest' must be the lexicographically smallest substring of length 'k'
+        // 'largest' must be the lexicographically largest substring of length 'k'
+        
+        smallest=s.substring(0, k);
+        largest=s.substring(0, k);
+        
+        for(int i=0;i<s.length()-k+1;i++){
+            try{
+                
+            
+            String substring=s.substring(i, i+k);
+            if(substring.compareTo(smallest)<=0){
+                smallest=substring;
+            }
+            if(substring.compareTo(largest)>=0){
+                largest=substring;
+            }
+            }catch(Exception e){
+                System.out.println(e);
+            }
+           
+        }
+        return smallest + "\n" + largest;
+    }
+
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String s = scan.next();
+        int k = scan.nextInt();
+        scan.close();
+      
+        System.out.println(getSmallestAndLargest(s, k));
+    }
+}
+
+//Hackerrank
+Q2:Java Varargs - Simple Addition
+You are given a class Solution and its main method in the editor.
+Your task is to create the class Add and the required methods so that the code prints the sum of the numbers passed to the function add.
+
+Note: Your add method in the Add class must print the sum as given in the Sample Output
+
+Code:
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+
+
+class Add{
+   
+    
+    public void add(int b,int ...a){
+        int result=b;
+        System.out.print(b);
+        for(int i:a){
+            System.out.print("+"+i);
+            result+=i;
+           
+        }
+        System.out.println("="+result);
+    }
+
+}
+
+
+public class Solution {
+
+    public static void main(String[] args) {
+       try{
+			BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+			int n1=Integer.parseInt(br.readLine());
+			int n2=Integer.parseInt(br.readLine());
+			int n3=Integer.parseInt(br.readLine());
+			int n4=Integer.parseInt(br.readLine());
+			int n5=Integer.parseInt(br.readLine());
+			int n6=Integer.parseInt(br.readLine());
+			Add ob=new Add();
+			ob.add(n1,n2);
+			ob.add(n1,n2,n3);
+			ob.add(n1,n2,n3,n4,n5);	
+			ob.add(n1,n2,n3,n4,n5,n6);
+			Method[] methods=Add.class.getDeclaredMethods();
+			Set<String> set=new HashSet<>();
+			boolean overload=false;
+			for(int i=0;i<methods.length;i++)
+			{
+				if(set.contains(methods[i].getName()))
+				{
+					overload=true;
+					break;
+				}
+				set.add(methods[i].getName());
+				
+			}
+			if(overload)
+			{
+				throw new Exception("Overloading not allowed");
+			}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+	
+	
+
+}
+
+//w3resource
+Q3:
+a. Write a Java recursive method to calculate the factorial of a given positive integer.
+b. Write a Java recursive method to calculate the sum of all numbers from 1 to n.
+c. Write a Java recursive method to calculate the nth Fibonacci number.
+d. Write a Java recursive method to calculate the exponentiation of a number (base) raised to a power (exponent).
+e. Write a Java recursive method to find the greatest common divisor (GCD) of two numbers.
+f. Write a Java recursive method to find the sum of the digits of a given integer.
+g. Write a Java recursive method to check if a given string is a palindrome.
+h. Write a Java recursive method to reverse a given string.
+i. Write a Java recursive method to find the length of a given string.
+j. Write a Java recursive method to check if a given array is sorted in ascending order.
+k. Write a Java recursive method to calculate the product of all numbers in an array.
+l. Write a Java recursive method to count the number of occurrences of a specific element in an array.
+m. Write a Java recursive method to find the maximum element in an array.
+n. Write a Java recursive method to find the sum of all odd numbers in an array.
+
+
+Code:
+import java.util.*;
+
+
+public class Main{
+  public static int eleCount=0;
+  public static int maxEle=Integer.MIN_VALUE;
+  
+  
+ 
+  public static int fact(int n){
+      if(n==0 || n==1){
+          return 1;
+      }
+      
+      int ans=n*fact(n-1);
+      return ans;
+  }
+  
+  public static int sum(int n){
+    if(n==0){
+      return 0;
+    }
+    int ans=n+sum(n-1);
+    return ans;
+  }
+  
+  public static int nFib(int n){
+    if(n==0 || n==1){
+      return n;
+    }
+    int ans=nFib(n-1)+nFib(n-2);
+    return ans;
+  }
+  
+  public static int expo(int x,int n){
+    if(n==0){
+      return 1;
+    }
+    if(n==1){
+      return x;
+    }
+    
+    return x*expo(x,n-1);
+  }
+  
+  public static int gcd(int n1,int n2){
+    if(n1==0){
+      return n2;
+    }
+    if(n2==0){
+      return n1;
+    }
+    if(n1==n2){
+      return n1;
+    }
+    if(n1>n2){
+      return gcd(n1%n2,n2);
+    }
+    else{
+      return gcd(n1,n2%n1);
+    }
+  }
+  
+  public static int digitSum(int n){
+    if(n==0){
+      return 0;
+    }
+    
+    int sum=n%10+digitSum(n/10);
+    
+    return sum;
+  }
+  
+  public static  boolean isPalindrome(String s,int start,int end){
+      if(start>=end){
+        return true;
+      }
+      
+      if(s.charAt(start)==s.charAt(end)){
+        return isPalindrome(s,start+1,end-1);
+      }
+      else{
+        return false;
+      }
+  }
+   
+  public static String reverse(String s){
+    if(s.length()==0||s.length()==1){
+      return s;
+    }
+    
+    return reverse(s.substring(1))+s.charAt(0);
+    
+  }
+  
+  public static int strLength(String s){
+    if(s.isEmpty()){
+      return 0;
+    }
+    return strLength(s.substring(1))+1;
+  }
+  
+  public static boolean isSorted(int[] myArray,int index ){
+    if(index>=myArray.length-1){
+      return true;
+    }
+    
+    if(myArray[index]<=myArray[index+1]){
+      return isSorted(myArray,index+1);
+    }
+    
+    else{
+      return false;
+    }
+  }
+  
+  public static int product(int[] myArray,int index){
+    
+    if(myArray.length==0){
+      return 0;
+    }
+    
+    if(index>myArray.length-1){
+      return 1;
+    }
+    
+    int ans=myArray[index]*product(myArray,index+1);
+    return ans;
+    
+  }
+ public static void occurence(int myArray[],int index,int ele){
+   if(index>myArray.length-1){
+     return;
+   }
+   if(myArray[index]==ele){
+     eleCount++;
+   }
+   occurence(myArray,index+1,ele);
+ }
+ 
+ public static void arrayMax(int myArray[],int index){
+   if(index>myArray.length-1){
+     return;
+   }
+   if(myArray[index]>maxEle){
+     maxEle=myArray[index];
+   }
+   
+   arrayMax(myArray,index+1);
+ }
+  public static int sumOdd(int myArray[],int index){
+    if(index>myArray.length-1){
+      return 0;
+    }
+    int sum=0;
+    if(myArray[index]%2==1){
+      sum=myArray[index]+sumOdd(myArray,index+1);
+    }
+    else{
+      sum=sumOdd(myArray,index+1);
+    }
+    return sum;
+  }
+  
+  
+  public static void main(String[] args){
+      Scanner scan=new Scanner(System.in);
+      int n=scan.nextInt();
+      System.out.println(fact(n));
+      System.out.println(sum(n));
+      System.out.println(nFib(n));
+      
+      int num=scan.nextInt();
+      int ex=scan.nextInt();
+      System.out.println(expo(num,ex));
+      
+      int n1=scan.nextInt();
+      int n2=scan.nextInt();
+      System.out.println(gcd(n1,n2));
+      
+      System.out.println(digitSum(n1));
+      
+      String s=scan.next();
+      System.out.println(isPalindrome(s,0,s.length()-1));
+      System.out.println(reverse(s));
+      System.out.println(strLength(s));
+      
+      int myArray[]={1,2,3,4,5};
+      System.out.println(isSorted(myArray,0));
+      System.out.println(product(myArray,0));
+      occurence(myArray,0,1);
+      System.out.println(eleCount);
+      arrayMax(myArray,0);
+      System.out.println(maxEle);
+      System.out.println(sumOdd(myArray,0));
+      
+      
+      
+      
+  }
+}
+//leetcode
+Q4: Longest Consecutive Sequence
+Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+Code:
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if(nums.length==0)
+            return 0;
+        Arrays.sort(nums);
+
+        int maxcount=0;
+        int count=1;
+        for(int i=0;i<nums.length-1;i++){
+            if(nums[i]+1==nums[i+1]){
+                count++;
+            }
+            else if(nums[i]==nums[i+1]){
+                continue;
+            }
+            else{
+                maxcount=Math.max(maxcount,count);
+                count=1;
+            }
+        }
+        maxcount=Math.max(maxcount,count);
+        return maxcount;
+
+    
+    }
+}
+
+Q5:You have to implement a library using Java Class "Library"
+
+Methods: addBook, issueBook, returnBook, showAvailableBooks
+Properties: Array to store the available books,
+Array to store the issued books
+
+Code:
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+import java.util.*;
+
+class Book{
+    
+    public String title;
+    public String author;
+    public String ISBN;
+    
+    
+    private static List<Book>AvailableBooks=new ArrayList<>();
+    private static List<Book>issuedBooks=new ArrayList<>();
+    
+    public Book(String title,String author,String ISBN){
+        this.title=title;
+        this.author=author;
+        this.ISBN=ISBN;
+    }
+    
+    static void  addBook(Book book ){
+        boolean isPresent=false;
+        for(Book b:AvailableBooks){
+            if(b.ISBN.equals(book.ISBN)){
+                isPresent=true;
+                break;
+            }
+        }
+        
+        if(!isPresent){
+            AvailableBooks.add(book);
+        }
+    }
+    
+
+    
+    public String toString(){
+        return this.title+" "+this.ISBN+" "+this.author;
+    }
+    
+    static void showAvailableBooks(){
+        System.out.println("#####################Showing Available books#################");
+        for(Book b:AvailableBooks){
+            System.out.println(b);
+        }
+        System.out.println();
+    }
+    
+    static void issueBook(String myString){
+        boolean isRemoved=false;
+        for(Book b:AvailableBooks){
+            if(b.title.equals(myString)||b.ISBN.equals(myString)||b.author.equals(myString)){
+                issuedBooks.add(b);
+                isRemoved=AvailableBooks.remove(b);
+                break;
+            }
+        }
+        if(!isRemoved){
+            System.out.println("Book not found to issue");
+        }
+     
+    }
+    
+    static void showIssuedBooks(){
+        System.out.println("#####################Showing issued books#################");
+        for(Book b:issuedBooks){
+            System.out.println(b);
+        }
+        System.out.println();
+    }
+    
+    static void returnBook(String myString){
+        boolean isRemoved=false;
+        for(Book b:issuedBooks){
+            if(b.title.equals(myString)||b.ISBN.equals(myString)||b.author.equals(myString)){
+                AvailableBooks.add(b);
+                isRemoved=issuedBooks.remove(b);
+                break;
+            }
+        }
+        if(!isRemoved){
+            System.out.println("Book cannot be returned");
+        }
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		Book book1=new Book("The C Programming Language", "Dennis Ritchie, Brian Kernighan", "9780131101630");
+		Book book2=new Book("An Introduction to Python", "Guido van Rossum", "9355423489");
+		
+		Book.addBook(book1);
+		Book.addBook(book2);
+		
+		
+		Book.showAvailableBooks();
+        Book.showIssuedBooks();
+		
+		Book.issueBook("An Introduction to Python");
+		Book.showAvailableBooks();
+        Book.showIssuedBooks();
+        
+        Book.returnBook("An Introduction to Python");
+        Book.showAvailableBooks();
+        Book.showIssuedBooks();
+		
+	}
+}
+
+
+//leetcode
+Q7:Majority Element II
+Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+Code:
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int n=nums.length;
+
+        Map<Integer,Integer>m=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(!m.containsKey(nums[i])){
+                m.put(nums[i],1);
+            }
+            else{
+                m.put(nums[i],m.get(nums[i])+1);
+            }
+        }
+        List<Integer>ans=new ArrayList<>();
+        for(int key:m.keySet()){
+            if(m.get(key)>n/3){
+                ans.add(key);
+            }
+        }
+
+        return ans;
+    }
+}
+
+Q8:Remove Element
+Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
+Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
+Return k.
+Code:
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int j=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=val){
+                int temp=nums[j];
+                nums[j]=nums[i];
+                nums[i]=temp;
+                j++;
+            }
+        }
+
+        return j;
+    }
+}
+
+//leetcode
+Q9:Maximum Subarray
+Given an integer array nums, find the subarray with the largest sum, and return its sum.
+Code:
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int maxSum=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            int sum=0;
+            for(int j=i;j<nums.length;j++){
+                sum+=nums[j];
+                maxSum=Math.max(maxSum,sum);
+            }
+        }
+        return maxSum;
+    }
+}
